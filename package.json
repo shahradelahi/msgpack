@@ -1,0 +1,51 @@
+{
+  "name": "@se-oss/msgpack",
+  "version": "0.0.0",
+  "description": "",
+  "keywords": [],
+  "homepage": "https://github.com/shahradelahi/msgpack",
+  "repository": "github:shahradelahi/msgpack",
+  "license": "MIT",
+  "author": "Shahrad Elahi <shahrad@litehex.com> (https://github.com/shahradelahi)",
+  "type": "module",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "default": "./dist/index.cjs"
+    }
+  },
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist/**",
+    "!**/*.d.cts"
+  ],
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "lint": "pnpm typecheck && eslint .",
+    "lint:fix": "eslint --fix .",
+    "prepublishOnly": "pnpm lint && pnpm build && pnpm format:check && pnpm test",
+    "test": "vitest --run",
+    "typecheck": "tsc --noEmit"
+  },
+  "prettier": "@shahrad/prettier-config",
+  "dependencies": {
+    "@msgpack/msgpack": "3.0.0-beta2"
+  },
+  "devDependencies": {
+    "@shahrad/eslint-config": "^1.0.0",
+    "@shahrad/prettier-config": "^1.1.0",
+    "@sindresorhus/tsconfig": "^7.0.0",
+    "@types/node": "22.10.10",
+    "eslint": "^9.19.0",
+    "globals": "^15.14.0",
+    "prettier": "^3.4.2",
+    "tsup": "^8.3.5",
+    "typescript": "^5.7.3",
+    "vitest": "^3.0.4"
+  },
+  "packageManager": "pnpm@9.15.4"
+}

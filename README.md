@@ -1,1 +1,1 @@
-# msgpack
+# @se-oss/msgpack
