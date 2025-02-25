@@ -1,8 +1,18 @@
 {
   "name": "@se-oss/msgpack",
   "version": "0.0.0",
-  "description": "",
-  "keywords": [],
+  "description": "Encode objects and buffers to base64 MessagePack and decode them back with ease.",
+  "keywords": [
+    "msgpack",
+    "base64",
+    "encode",
+    "decode",
+    "serialization",
+    "deserialization",
+    "buffer",
+    "binary",
+    "json"
+  ],
   "homepage": "https://github.com/shahradelahi/msgpack",
   "repository": "github:shahradelahi/msgpack",
   "license": "MIT",
@@ -10,11 +20,13 @@
   "type": "module",
   "exports": {
     ".": {
+      "types": "./dist/index.d.ts",
       "import": "./dist/index.js",
       "default": "./dist/index.cjs"
     }
   },
-  "main": "dist/index.js",
+  "main": "dist/index.cjs",
+  "module": "dist/index.js",
   "types": "dist/index.d.ts",
   "files": [
     "dist/**",

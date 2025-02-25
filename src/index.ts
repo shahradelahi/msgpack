@@ -1,6 +1,6 @@
-import { decode, encode } from '@msgpack/msgpack';
+import { decode as _decode, encode as _encode } from '@msgpack/msgpack';
 
-import type { DecoderOptions, EncoderOptions, ObjectLike } from '@/typings';
+import type { BufferLike, DecoderOptions, EncoderOptions, ObjectLike } from '@/typings';
 
 export class MSGPack {
   /**
@@ -22,11 +22,7 @@ export class MSGPack {
     }
 
     const buffer = Buffer.from(input, 'base64');
-    return this.decode(buffer, options);
-  }
-
-  public static decode(input: Buffer, options?: Partial<DecoderOptions>): unknown {
-    return decode(input, options);
+    return decode(buffer, options);
   }
 
   /**
@@ -38,29 +34,32 @@ export class MSGPack {
    * @throws {TypeError} If the input is not an object.
    */
   public static stringify(input: ObjectLike, options?: Partial<EncoderOptions>): string {
-    return MSGPack.encode(input, options).toString('base64');
+    return Buffer.from(encode(input, options)).toString('base64');
+  }
+}
+
+export function encode(input: ObjectLike, options?: Partial<EncoderOptions>): Uint8Array {
+  if (!isObjectLike(input)) {
+    throw new TypeError('input must be an object');
   }
 
-  public static encode(input: ObjectLike, options?: Partial<EncoderOptions>): Buffer {
-    if (!MSGPack.isObjectLike(input)) {
-      throw new TypeError('input must be an object');
-    }
+  return _encode(input, options);
+}
 
-    const encoded = encode(input, options);
-    return Buffer.from(encoded.buffer, encoded.byteOffset, encoded.byteLength);
+export function decode(input: BufferLike, options?: Partial<DecoderOptions>): unknown {
+  return _decode(input, options);
+}
+
+export function isObjectLike(input: unknown): boolean {
+  return typeof input === 'object' && input !== null;
+}
+
+export function isBase64(input: any): boolean {
+  if (typeof input !== 'string') {
+    return false;
   }
 
-  public static isObjectLike(input: unknown): input is ObjectLike {
-    return typeof input === 'object' && input !== null;
-  }
-
-  public static isBase64(input: any): boolean {
-    if (typeof input !== 'string') {
-      return false;
-    }
-
-    return /^([A-Za-z0-9+/]{4})*([A-Za-z0-9+/]{3}=|[A-Za-z0-9+/]{2}==)?$/.test(input);
-  }
+  return /^([A-Za-z0-9+/]{4})*([A-Za-z0-9+/]{3}=|[A-Za-z0-9+/]{2}==)?$/.test(input);
 }
 
 export default MSGPack;

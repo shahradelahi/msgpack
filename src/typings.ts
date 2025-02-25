@@ -1,8 +1,15 @@
 export type ObjectLike =
   | Record<string | number | symbol, unknown>
   | Array<unknown>
-  | Buffer
+  | BufferLike
   | object;
+
+export type BufferLike =
+  | Buffer
+  | Uint8Array
+  | ArrayLike<number>
+  | ArrayBufferView
+  | ArrayBufferLike;
 
 export interface EncoderOptions {
   /**
