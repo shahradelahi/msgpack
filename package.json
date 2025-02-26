@@ -1,6 +1,6 @@
 {
   "name": "@se-oss/msgpack",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "Encode objects and buffers to base64 MessagePack and decode them back with ease.",
   "keywords": [
     "msgpack",
