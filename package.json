@@ -57,7 +57,7 @@
     "prettier": "^3.5.2",
     "tsup": "^8.3.6",
     "typescript": "^5.7.3",
-    "vitest": "^3.0.7"
+    "vitest": "^4.0.0"
   },
   "peerDependencies": {
     "@msgpack/msgpack": "^3.1"
